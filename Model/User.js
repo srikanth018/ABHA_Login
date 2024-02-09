@@ -41,5 +41,6 @@ const findUserByUsername = (username, callback) => {
   });
 };
 
+// user.js
 
 module.exports = { createUserTable, createUser, findUserByUsername };

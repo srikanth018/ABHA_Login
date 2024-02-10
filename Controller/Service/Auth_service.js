@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { createUser, findUserByUsername } = require('../Model/User');
+const { createUser, findUserByUsername } = require('../../Model/User');
 
 class AuthService {
   async register(username, password) {

@@ -5,7 +5,7 @@ const createUserTable = () => {
   const query = `
     CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      username VARCHAR(255) UNIQUE NOT NULL,
+      mobile_number VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL
     )
   `;
@@ -18,9 +18,9 @@ const createUserTable = () => {
   });
 };
 
-const createUser = (username, password) => {
-  const query = `INSERT INTO users (username, password) VALUES (?, ?)`;
-  db.query(query, [username, password], (err, result) => {
+const createUser = (mobile_number, password) => {
+  const query = `INSERT INTO users (mobile_number, password) VALUES (?, ?)`;
+  db.query(query, [mobile_number, password], (err, result) => {
     if (err) {
       console.error('Error creating user:', err);
       return;
@@ -29,11 +29,11 @@ const createUser = (username, password) => {
   });
 };
 
-const findUserByUsername = (username, callback) => {
-  const query = `SELECT * FROM users WHERE username = ?`;
-  db.query(query, [username], (err, result) => {
+const findUserBymobile_number = (mobile_number, callback) => {
+  const query = `SELECT * FROM users WHERE mobile_number = ?`;
+  db.query(query, [mobile_number], (err, result) => {
     if (err) {
-      console.error('Error finding user by username:', err);
+      console.error('Error finding user by mobile_number:', err);
       callback(err, null);
       return;
     }
@@ -43,4 +43,4 @@ const findUserByUsername = (username, callback) => {
 
 // user.js
 
-module.exports = { createUserTable, createUser, findUserByUsername };
+module.exports = { createUserTable, createUser, findUserBymobile_number };

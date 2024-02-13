@@ -80,8 +80,9 @@ class AuthService {
 
 
   async verifyAadhaarOTP(otp, txnId) {
+    const apiBaseUrl = 'https://healthidsbx.abdm.gov.in';
     try {
-      const url = `${this.apiBaseUrl}/v1/registration/aadhaar/verifyOTP`;
+      const url = `${apiBaseUrl}/v1/registration/aadhaar/verifyOTP`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {

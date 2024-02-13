@@ -53,57 +53,45 @@ class AuthService {
       });
     });
   }
-  async generateAadhaarOTP(aadharNumber){
-  const apiBaseUrl = 'https://healthidsbx.abdm.gov.in';
-    
+  constructor() {
+    this.apiBaseUrl = 'https://healthidsbx.abdm.gov.in';
+  }
+
+  async generateAadhaarOTP(aadharNumber) {
     try {
-      const url = `${apiBaseUrl}/v1/registration/aadhaar/generateOtp`;
-      const response = await fetch(url, {
-        method: 'POST',
+      const url = `${this.apiBaseUrl}/v1/registration/aadhaar/generateOtp`;
+      const response = await axios.post(url, { aadharNumber }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ aadharNumber })
+        }
       });
 
-      if (!response.ok) {
-        throw new Error(`Failed to generate Aadhaar OTP: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      return data;
+      return response.data;
     } catch (error) {
-      console.error('Error generating Aadhaar OTP:', error);
+      console.error('Error generating Aadhaar OTP:', error.message);
       throw error;
     }
   }
-
 
   async verifyAadhaarOTP(otp, txnId) {
-    const apiBaseUrl = 'https://healthidsbx.abdm.gov.in';
     try {
-      const url = `${apiBaseUrl}/v1/registration/aadhaar/verifyOTP`;
-      const response = await fetch(url, {
-        method: 'POST',
+      const url = `${this.apiBaseUrl}/v1/registration/aadhaar/verifyOTP`;
+      const response = await axios.post(url, { otp, txnId }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ otp, txnId })
+        }
       });
 
-      if (!response.ok) {
-        throw new Error(`Failed to verify Aadhaar OTP: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      return data;
+      return response.data;
     } catch (error) {
-      console.error('Error verifying Aadhaar OTP:', error);
+      console.error('Error verifying Aadhaar OTP:', error.message);
       throw error;
     }
   }
-
 }
+
+
+
 
 
 

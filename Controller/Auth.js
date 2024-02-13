@@ -1,4 +1,5 @@
 const AuthService = require('../Service/Auth_service');
+const errors= require('../errors');
 
 const authService = new AuthService();
 
@@ -42,7 +43,6 @@ exports.aadhar_verify = async (req, res) => {
       res.status(400).json({ message: 'Aadhaar verification failed', error: otpVerificationResponse.error });
     }
   } catch (error) {
-    console.error('Error occurred during Aadhaar verification:', error.message);
-    res.status(500).json({ message: 'Internal server error' });
+    errors.handleServerError(res, error);
   }
 };

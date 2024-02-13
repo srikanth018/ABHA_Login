@@ -10,4 +10,5 @@ router.route("/login").post(login);
 // Add the Aadhaar verification route
 router.route("/aadhar-verify").post(aadhar_verify);
 
+
 module.exports = router;
